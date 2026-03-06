@@ -25,24 +25,46 @@
         <div class="blob blob-2"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-content">
+    <!-- Navigation Wrapper -->
+    <header id="header" class="header">
+        <div class="header-content">
             <div class="logo">M.A.S.D</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#certificates">Certificates</a></li>
-                <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
-            </ul>
+
+            <nav id="navbar" class="navbar">
+                <div class="nav-indicator"></div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#certificates">Certificates</a></li>
+                    <li class="mobile-contact-nav"><a href="#contact">Get in Touch</a></li>
+                </ul>
+            </nav>
+
+            <a href="#contact" class="nav-cta">Get in Touch</a>
+
             <!-- Mobile Menu Toggle -->
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
         </div>
-    </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay">
+        <div class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#contact" class="mobile-menu-cta">Get in Touch</a></li>
+        </ul>
+    </div>
 
     <!-- Main Content -->
     <main>
@@ -68,25 +90,43 @@
             <h2 class="section-title reveal">About Me</h2>
             <div class="about-container reveal">
                 <div class="about-grid">
-                    <div class="about-image-placeholder glass-card">
-                        <span>[Your Photo Placeholder]</span>
+                    <div class="about-image-placeholder glass-card desktop-only-image">
+                        <div class="profile-glow-ambient"></div>
+                        <img src="profile1.png" alt="Profile Image" class="embedded-profile-image">
                     </div>
                     <div class="about-text glass-card">
-                        <p>
-                            I am a passionate Web Developer specializing in Frontend Development and UI/UX Design. I
-                            love creating beautiful, interactive, and user-centric digital experiences.
-                        </p>
-                        <p>
-                            With a keen eye for design and a strong foundation in modern web technologies, I bridge the
-                            gap between design and engineering to build products that look great and perform flawlessly.
-                        </p>
-                        <p>
-                            [You can add more personal details here later. Example: I enjoy exploring new technologies,
-                            3D modeling, and continuously refining my skills to stay at the forefront of the industry.]
-                        </p>
+                        <div class="profile-glow-wrapper mobile-only-image">
+                            <div class="profile-glow-ambient"></div>
+                            <img src="profile1.png" alt="Profile Image" class="embedded-profile-image">
+                        </div>
+                        <div>
+                            <p>
+                                Hello! I'm a dedicated and creative college student with a strong passion for building
+                                beautiful and intuitive web experiences.
+                                I specialize in frontend development, using HTML, CSS, and JavaScript to turn ideas into
+                                responsive, interactive websites.
+                                I truly enjoy the process of solving problems and making sure every detail is perfect
+                                for
+                                the user.
+                            </p>
+                            <p>
+                                With a keen eye for design and a strong foundation in modern web technologies, I bridge
+                                the
+                                gap between design and engineering to build products that look great and perform
+                                flawlessly.
+                            </p>
+                            <p>
+                                In addition to coding, I'm proficient in UI/UX design using Figma to create thoughtful
+                                wireframes, mockups, and prototypes.
+                                I'm actively seeking an internship where I can apply my skills to real-world projects,
+                                learn
+                                from experienced mentors,
+                                and contribute to a team that values clean code and user-centric design. I'm excited to
+                                bring my enthusiasm and dedication to a professional setting!
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <!-- Skills Section -->
@@ -96,11 +136,11 @@
                 <!-- Skill Items -->
                 <div class="skill-item glass-card interactive-card">
                     <i class="fab fa-html5 skill-icon" style="color: #E34F26;"></i>
-                    <span>HTML5</span>
+                    <span>HTML</span>
                 </div>
                 <div class="skill-item glass-card interactive-card">
                     <i class="fab fa-css3-alt skill-icon" style="color: #1572B6;"></i>
-                    <span>CSS3</span>
+                    <span>CSS</span>
                 </div>
                 <div class="skill-item glass-card interactive-card">
                     <i class="fab fa-js skill-icon" style="color: #F7DF1E;"></i>
@@ -115,7 +155,7 @@
                         alt="Blender Logo" class="skill-icon" style="width: 48px; height: 48px;">
                     <span>Blender</span>
                 </div>
-                <!-- Add more skills as needed -->
+                <!-- Add more skills -->
             </div>
         </section>
 
@@ -127,35 +167,43 @@
                 <!-- Project Card 1 -->
                 <div class="project-card glass-card interactive-card group">
                     <div class="project-image-placeholder">
-                        <span>[Project Image 1 Placeholder]</span>
+                        <span><img src="vkellog.png" alt="Project Image 1"></span>
                     </div>
                     <div class="project-info">
-                        <h3>Project Title 1</h3>
-                        <p class="project-desc">A brief description of the project goes here. Explain what was built and
-                            the technologies used.</p>
+                        <h3>VKellog</h3>
+                        <p class="project-desc">A modern fancy culinary website built using HTML, CSS, and JavaScript.
+                            This project showcases my ability to create visually appealing web designs, as well as
+                            implement
+                            interactive features to enhance user experience. It is one of the projects
+                            that i made for my independent frontend project.</p>
                         <div class="project-tags">
                             <span class="tag">HTML</span>
                             <span class="tag">CSS</span>
                             <span class="tag">JS</span>
                         </div>
-                        <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://syqeer123.github.io/VKellogg/" target="_blank" class="project-link">View
+                            Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
                 <!-- Project Card 2 -->
                 <div class="project-card glass-card interactive-card group">
                     <div class="project-image-placeholder">
-                        <span>[Project Image 2 Placeholder]</span>
+                        <span><img src="sceneit.png" alt="Project Image 2"></span>
                     </div>
                     <div class="project-info">
-                        <h3>Project Title 2</h3>
-                        <p class="project-desc">A brief description of the project goes here. Explain what was built and
-                            the technologies used.</p>
+                        <h3>SceneIt</h3>
+                        <p class="project-desc">A movie trivia website built using HTML, CSS, and JavaScript. The
+                            website provides
+                            an engaging platform for movie enthusiasts to test their knowledge and compete with others.
+                            It is a team project built by me and my team.</p>
                         <div class="project-tags">
-                            <span class="tag">Figma</span>
-                            <span class="tag">UI/UX</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JS</span>
                         </div>
-                        <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://scene-it-git-main-fanobanos-projects.vercel.app/index.html" target="_blank"
+                            class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -187,11 +235,11 @@
                 <!-- Cert 1 -->
                 <div class="certificate-card glass-card interactive-card">
                     <div class="cert-image-placeholder">
-                        <span>[Certificate Photo Placeholder]</span>
+                        <span><img src="EnglishFundamental.png" alt="Certificate Image 1"></span>
                     </div>
                     <div class="cert-info">
-                        <h4>Frontend Developer Certification</h4>
-                        <p>Issued by [Issuer Name]. An intensive course covering modern frontend concepts.</p>
+                        <h4>English Fundamental Certificate</h4>
+                        <p>Issued by codingstudio. An intensive course covering fundamentals for day to day english.</p>
                     </div>
                 </div>
 
@@ -214,7 +262,8 @@
         <section id="contact" class="section last-section">
             <h2 class="section-title reveal">Get in Touch</h2>
             <div class="contact-container glass-card reveal">
-                <p class="contact-prompt">I'm currently available for freelance work or full-time opportunities. If you
+                <p class="contact-prompt">I'm currently available for internships or full-time work opportunities. If
+                    you
                     have a project that you want to get started, think you need my help with something or just fancy
                     saying hey, then get in touch.</p>
 
