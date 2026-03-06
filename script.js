@@ -38,16 +38,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navIndicator.style.opacity = '1';
 
+        const navbar = document.querySelector('.navbar');
         const linkRect = activeLink.getBoundingClientRect();
-        const navbarRect = document.querySelector('.navbar').getBoundingClientRect();
+        const navbarRect = navbar.getBoundingClientRect();
 
-        const relativeLeft = linkRect.left - navbarRect.left;
+        const relativeLeft = linkRect.left - navbarRect.left + navbar.scrollLeft;
         const relativeTop = linkRect.top - navbarRect.top;
 
         navIndicator.style.left = `${relativeLeft}px`;
         navIndicator.style.top = `${relativeTop}px`;
         navIndicator.style.width = `${linkRect.width}px`;
         navIndicator.style.height = `${linkRect.height}px`;
+
+        // Automatically scroll the navbar so the active capsule is visible (specifically for mobile)
+        // We calculate the center of the link relative to the navbar and adjust scrollLeft smoothly
+        if (window.innerWidth <= 900) {
+            const scrollTarget = relativeLeft - (navbarRect.width / 2) + (linkRect.width / 2);
+            navbar.scrollTo({
+                left: scrollTarget,
+                behavior: 'smooth'
+            });
+        }
     }
 
     // Set initial active state explicitly
@@ -62,6 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+            // reset to top state
+            if (window.innerWidth <= 900) {
+                document.querySelector('.navbar').scrollTo({ left: 0, behavior: 'smooth' });
+            }
         }
 
         // Highlight active nav link based on scroll position
