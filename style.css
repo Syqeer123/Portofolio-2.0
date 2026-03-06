@@ -1037,7 +1037,8 @@ footer p {
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         justify-content: flex-start;
-        width: auto;
+        width: max-content;
+        max-width: calc(100vw - 32px);
         z-index: 100;
     }
 
@@ -1084,7 +1085,7 @@ footer p {
     }
 
     .header.scrolled .navbar {
-        bottom: 25px;
+        bottom: max(25px, calc(10px + env(safe-area-inset-bottom)));
         transform: translateX(50%) scale(1);
         opacity: 1;
         pointer-events: auto;
@@ -1151,15 +1152,16 @@ footer p {
 
     /* Hero Adjustments */
     .hero h1 {
-        font-size: 3.2rem;
+        font-size: clamp(2.1rem, 8vw, 2.7rem);
+        line-height: 1.1;
     }
 
     .specialty {
-        font-size: 2.1rem;
+        font-size: clamp(1.6rem, 6vw, 2.1rem);
     }
 
     .sub-specialty {
-        font-size: 1.35rem;
+        font-size: clamp(1.1rem, 4vw, 1.35rem);
     }
 
     .hero-buttons {
