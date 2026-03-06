@@ -28,16 +28,40 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================
        NAVBAR SCROLL EFFECT & ACTIVE STATE
        ========================================== */
-    const navbar = document.getElementById('navbar');
+    const header = document.getElementById('header');
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
+    const navIndicator = document.querySelector('.nav-indicator');
+
+    function updateNavIndicator(activeLink) {
+        if (!activeLink || !navIndicator) return;
+
+        navIndicator.style.opacity = '1';
+
+        const linkRect = activeLink.getBoundingClientRect();
+        const navbarRect = document.querySelector('.navbar').getBoundingClientRect();
+
+        const relativeLeft = linkRect.left - navbarRect.left;
+        const relativeTop = linkRect.top - navbarRect.top;
+
+        navIndicator.style.left = `${relativeLeft}px`;
+        navIndicator.style.top = `${relativeTop}px`;
+        navIndicator.style.width = `${linkRect.width}px`;
+        navIndicator.style.height = `${linkRect.height}px`;
+    }
+
+    // Set initial active state explicitly
+    navLinks[0].classList.add('active');
+    setTimeout(() => {
+        updateNavIndicator(navLinks[0]);
+    }, 100);
 
     window.addEventListener('scroll', () => {
         // Add Glassmorphism background to navbar on scroll
         if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
+            header.classList.add('scrolled');
         } else {
-            navbar.classList.remove('scrolled');
+            header.classList.remove('scrolled');
         }
 
         // Highlight active nav link based on scroll position
@@ -50,44 +74,56 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        let activeAssigned = false;
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
+            if (current && link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
+                updateNavIndicator(link);
+                activeAssigned = true;
             }
         });
+
+        // Edge case: hitting top of page
+        if (window.scrollY < 200 && !activeAssigned && navLinks.length > 0) {
+            navLinks[0].classList.add('active');
+            updateNavIndicator(navLinks[0]);
+        }
+    });
+
+    // Also update on resize to keep the capsule aligned
+    window.addEventListener('resize', () => {
+        const activeLink = document.querySelector('.nav-links a.active');
+        if (activeLink) updateNavIndicator(activeLink);
     });
 
     /* ==========================================
        MOBILE MENU TOGGLE
        ========================================== */
     const menuToggle = document.querySelector('.menu-toggle');
-    const navLinksContainer = document.querySelector('.nav-links');
-    const toggleIcon = menuToggle.querySelector('i');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-links a');
 
-    menuToggle.addEventListener('click', () => {
-        navLinksContainer.classList.toggle('active');
-
-        // Toggle icon between bars and times (close)
-        if (navLinksContainer.classList.contains('active')) {
-            toggleIcon.classList.remove('fa-bars');
-            toggleIcon.classList.add('fa-times');
-        } else {
-            toggleIcon.classList.remove('fa-times');
-            toggleIcon.classList.add('fa-bars');
-        }
-    });
-
-    // Close mobile menu when a link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinksContainer.classList.contains('active')) {
-                navLinksContainer.classList.remove('active');
-                toggleIcon.classList.remove('fa-times');
-                toggleIcon.classList.add('fa-bars');
-            }
+    if (menuToggle && mobileMenuOverlay) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenuOverlay.classList.add('active');
         });
-    });
+
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('active');
+            });
+        }
+
+        if (mobileMenuLinks) {
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.remove('active');
+                });
+            });
+        }
+    }
 
     /* ==========================================
        DYNAMIC GLITCH EFFECT RESET
@@ -102,4 +138,54 @@ document.addEventListener('DOMContentLoaded', () => {
             glitchText.style.animation = null;
         });
     }
+
+    /* ==========================================
+       NAVBAR DRAG TO SCROLL (MOBILE)
+       ========================================== */
+    const mobileNavbar = document.querySelector('.navbar');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    if (mobileNavbar) {
+        // Mouse dragging
+        mobileNavbar.addEventListener('mousedown', (e) => {
+            isDown = true;
+            mobileNavbar.style.cursor = 'grabbing';
+            startX = e.pageX - mobileNavbar.offsetLeft;
+            scrollLeft = mobileNavbar.scrollLeft;
+        });
+        mobileNavbar.addEventListener('mouseleave', () => {
+            isDown = false;
+            mobileNavbar.style.cursor = 'grab';
+        });
+        mobileNavbar.addEventListener('mouseup', () => {
+            isDown = false;
+            mobileNavbar.style.cursor = 'grab';
+        });
+        mobileNavbar.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - mobileNavbar.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll-fast
+            mobileNavbar.scrollLeft = scrollLeft - walk;
+        });
+
+        // Touch dragging (usually handled by native overflow-x scroll, but explicitly enforcing)
+        mobileNavbar.addEventListener('touchstart', (e) => {
+            isDown = true;
+            startX = e.touches[0].pageX - mobileNavbar.offsetLeft;
+            scrollLeft = mobileNavbar.scrollLeft;
+        });
+        mobileNavbar.addEventListener('touchend', () => {
+            isDown = false;
+        });
+        mobileNavbar.addEventListener('touchmove', (e) => {
+            if (!isDown) return;
+            const x = e.touches[0].pageX - mobileNavbar.offsetLeft;
+            const walk = (x - startX) * 2;
+            mobileNavbar.scrollLeft = scrollLeft - walk;
+        });
+    }
+
 });
