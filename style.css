@@ -2,19 +2,19 @@
    VARIABLES & THEME SETUP
    ========================================= */
 :root {
-    /* Color Palette - Premium Midnight Blue Theme */
-    --bg-main: #050A15;
-    --bg-secondary: #0A1224;
+    /* Color Palette - Premium Magenta Purple Theme */
+    --bg-main: #0B0415;
+    --bg-secondary: #140824;
 
-    --text-primary: #F0F4FC;
-    --text-secondary: #8B9BB4;
+    --text-primary: #FDF0FC;
+    --text-secondary: #B48BB4;
 
-    --accent-1: #3A6DFF;
-    /* Vibrant Blue */
-    --accent-2: #00D4FF;
-    /* Cyan */
-    --accent-3: #8C52FF;
-    /* Purple accent */
+    --accent-1: #FF2A85;
+    /* Vibrant Magenta */
+    --accent-2: #B026FF;
+    /* Bright Purple */
+    --accent-3: #FF00E6;
+    /* Pink accent */
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--accent-1), var(--accent-2));
@@ -56,70 +56,43 @@ body {
     position: relative;
 }
 
-/* Background Noise Texture for Premium Feel */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.03;
-    z-index: -1;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
 
-/* Fixed Background Lighting (Blobs) */
-.bg-lighting {
+/* Spline 3D Background */
+.spline-bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: -2;
-    /* Behind everything */
-    overflow: hidden;
-    pointer-events: none;
 }
 
-.blob {
+.spline-bg spline-viewer {
+    width: 100%;
+    height: 100%;
+}
+
+/* Copyright Year Badge */
+.year {
     position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.35;
-    animation: moveBlob 25s infinite alternate cubic-bezier(0.5, 0, 0.5, 1);
-}
-
-.blob-1 {
-    width: 60vw;
-    height: 60vw;
-    background: var(--accent-1);
-    top: -20%;
-    left: -10%;
-}
-
-.blob-2 {
-    width: 50vw;
-    height: 50vw;
-    background: var(--accent-2);
-    bottom: -10%;
-    right: -10%;
-    animation-delay: -10s;
-}
-
-@keyframes moveBlob {
-    0% {
-        transform: translate(0, 0) scale(1);
-    }
-
-    50% {
-        transform: translate(10vw, 5vh) scale(1.1);
-    }
-
-    100% {
-        transform: translate(-5vw, 10vh) scale(0.9);
-    }
+    bottom: 16px;
+    right: 16px;
+    width: 155px;
+    height: 40px;
+    background: rgba(11, 4, 21, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Typography Base */
@@ -189,7 +162,7 @@ a {
     background: var(--gradient-primary);
     color: white;
     border: none;
-    box-shadow: 0 4px 15px rgba(110, 86, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 42, 133, 0.4);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -210,7 +183,7 @@ a {
 
 .primary-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(110, 86, 255, 0.6);
+    box-shadow: 0 6px 20px rgba(255, 42, 133, 0.6);
 }
 
 .primary-btn:hover::before {
@@ -308,7 +281,7 @@ a {
     position: absolute;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 30px;
-    transition: all 0.5s cubic-bezier(0.34, 1.15, 0.64, 1);
+    transition: all 0.5s cubic-bezier(0.34, 1.45, 0.25, 1);
     z-index: 1;
     pointer-events: none;
     opacity: 0;
@@ -374,7 +347,7 @@ a {
 }
 
 .nav-cta:hover {
-    background: rgba(110, 86, 255, 0.1);
+    background: rgba(255, 42, 133, 0.1);
     color: white !important;
 }
 
@@ -452,7 +425,7 @@ a {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 3rem;
-    align-items: stretch;
+    align-items: center;
 }
 
 .about-image-placeholder {
@@ -562,14 +535,16 @@ a {
    PROJECTS SECTION
    ========================================= */
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2.5rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .project-card {
+    width: calc(50% - 1.25rem);
     padding: 0;
     overflow: hidden;
     display: flex;
@@ -608,7 +583,6 @@ a {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    background: var(--bg-secondary);
     position: relative;
     z-index: 2;
 }
@@ -634,6 +608,14 @@ a {
     color: var(--accent-2);
 }
 
+.project-links-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: auto;
+}
+
 .project-link {
     display: inline-flex;
     align-items: center;
@@ -641,7 +623,14 @@ a {
     font-weight: 600;
     color: var(--accent-1);
     transition: color var(--transition-fast);
-    align-self: flex-start;
+}
+
+.source-link {
+    color: var(--text-secondary);
+}
+
+.source-link:hover {
+    color: var(--text-primary);
 }
 
 .project-link:hover {
@@ -656,18 +645,24 @@ a {
     transform: translateX(5px);
 }
 
+.project-link.source-link:hover i {
+    transform: translateY(-3px);
+}
+
 /* =========================================
    CERTIFICATES SECTION
    ========================================= */
 .certificates-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .certificate-card {
+    width: calc(50% - 1rem);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -981,6 +976,10 @@ footer p {
 }
 
 @media screen and (max-width: 768px) {
+    .project-card, .certificate-card {
+        width: 100%;
+    }
+
     .section {
         padding: 5rem 5%;
     }
@@ -988,6 +987,23 @@ footer p {
     .section-title {
         font-size: 2.2rem;
         margin-bottom: 2rem;
+    }
+
+    /* Keep glitch effect running all the time */
+    .glitch-text::before {
+        left: 2px;
+        text-shadow: -2px 0 red;
+        animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        opacity: 1;
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+
+    .glitch-text::after {
+        left: -2px;
+        text-shadow: -2px 0 blue;
+        animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        opacity: 1;
+        clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
     }
 
     /* Mobile Menu Styles & Transtions */
