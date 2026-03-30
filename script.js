@@ -1,6 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================
+       SPLINE MOBILE TOUCH FIX
+       ========================================== */
+    // Browsers naturally cancel 'pointer' events when the user starts scrolling on mobile.
+    // This stops the 3D model from tracking the finger. 
+    // We bridge continuous 'touchmove' events back into 'pointermove' to keep Spline moving!
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            const touch = e.touches[0];
+            const simulatedEvent = new PointerEvent('pointermove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY,
+                pointerType: 'touch',
+                isPrimary: true,
+                bubbles: true
+            });
+            window.dispatchEvent(simulatedEvent);
+        }
+    }, { passive: true });
+
+    /* ==========================================
        SCROLL ANIMATIONS (INTERSECTION OBSERVER)
        ========================================== */
     const revealElements = document.querySelectorAll('.reveal');
@@ -45,9 +65,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const relativeLeft = linkRect.left - navbarRect.left + navbar.scrollLeft;
         const relativeTop = linkRect.top - navbarRect.top;
 
+        const currentLeft = parseFloat(navIndicator.style.left) || relativeLeft;
+        const diff = relativeLeft - currentLeft;
+
         navIndicator.style.left = `${relativeLeft}px`;
         navIndicator.style.top = `${relativeTop}px`;
-        navIndicator.style.width = `${linkRect.width}px`;
+        
+        // Bubbly expanding effect like iOS
+        if (Math.abs(diff) > 5) {
+            navIndicator.style.width = `${linkRect.width + Math.min(Math.abs(diff) * 0.4, 40)}px`;
+            
+            // Snap back to normal width
+            setTimeout(() => {
+                navIndicator.style.width = `${linkRect.width}px`;
+            }, 250);
+        } else {
+            navIndicator.style.width = `${linkRect.width}px`;
+        }
+        
         navIndicator.style.height = `${linkRect.height}px`;
 
         // Automatically scroll the navbar so the active capsule is visible (specifically for mobile)
