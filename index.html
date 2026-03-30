@@ -13,16 +13,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css?v=1.3">
 
+    <!-- Spline Viewer Web Component -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.72/build/spline-viewer.js"></script>
+
     <!-- Fallback for browsers that don't support smooth scrolling via CSS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js"></script>
 </head>
 
 <body>
 
-    <!-- Fixed Background Lighting -->
-    <div class="bg-lighting">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+
+
+    <!-- Spline 3D Interactive Background -->
+    <div class="spline-bg">
+        <spline-viewer loading-anim-type="spinner" url="https://prod.spline.design/pSVcsfup5ClE4ziH/scene.splinecode"
+            events-target="global"></spline-viewer>
+        <div class="year">© 2026</div>
     </div>
 
     <!-- Navigation Wrapper -->
@@ -106,17 +112,6 @@
                                 beautiful and intuitive web experiences.
                                 I specialize in frontend development, using HTML, CSS, and JavaScript to turn ideas into
                                 responsive, interactive websites.
-                                I truly enjoy the process of solving problems and making sure every detail is perfect
-                                for
-                                the user.
-                            </p>
-                            <p>
-                                With a keen eye for design and a strong foundation in modern web technologies, I bridge
-                                the
-                                gap between design and engineering to build products that look great and perform
-                                flawlessly.
-                            </p>
-                            <p>
                                 In addition to coding, I'm proficient in UI/UX design using Figma to create thoughtful
                                 wireframes, mockups, and prototypes.
                                 I'm actively seeking an internship where I can apply my skills to real-world projects,
@@ -182,8 +177,12 @@
                             <span class="tag">CSS</span>
                             <span class="tag">JS</span>
                         </div>
-                        <a href="https://syqeer123.github.io/VKellogg-s/" target="_blank" class="project-link">View
-                            Project <i class="fas fa-arrow-right"></i></a>
+                        <div class="project-links-wrapper">
+                            <a href="https://syqeer123.github.io/VKellogg/" target="_blank" class="project-link">View
+                                Website <i class="fas fa-arrow-right"></i></a>
+                            <a href="https://github.com/Syqeer123/VKellogg-s" target="_blank"
+                                class="project-link source-link"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
                     </div>
                 </div>
 
@@ -203,8 +202,12 @@
                             <span class="tag">CSS</span>
                             <span class="tag">JS</span>
                         </div>
-                        <a href="https://scene-it-git-main-fanobanos-projects.vercel.app/index.html" target="_blank"
-                            class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        <div class="project-links-wrapper">
+                            <a href="https://scene-it-git-main-fanobanos-projects.vercel.app/index.html" target="_blank"
+                                class="project-link">View Website <i class="fas fa-arrow-right"></i></a>
+                            <a href="https://github.com/Syqeer123" target="_blank" class="project-link source-link"><i
+                                    class="fab fa-github"></i> Source Code</a>
+                        </div>
                     </div>
                 </div>
 
@@ -222,7 +225,12 @@
                             <span class="tag">CSS</span>
                             <span class="tag">JS</span>
                         </div>
-                        <a href="https://syqeer123.github.io/Clariti/" target="_blank" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                        <div class="project-links-wrapper">
+                            <a href="https://syqeer123.github.io/Clariti/" target="_blank" class="project-link">View
+                                Website <i class="fas fa-arrow-right"></i></a>
+                            <a href="https://github.com/Syqeer123/Clariti" target="_blank"
+                                class="project-link source-link"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
                     </div>
                 </div>
 
@@ -241,19 +249,32 @@
                     </div>
                     <div class="cert-info">
                         <h4>English Fundamental Certificate</h4>
-                        <p>Issued by codingstudio. An intensive course covering fundamentals for day to day english.</p>
+                        <p>Issued by Coding Studio. An intensive course covering fundamentals for day to day english.
+                        </p>
                     </div>
                 </div>
 
                 <!-- Cert 2 -->
                 <div class="certificate-card glass-card interactive-card">
                     <div class="cert-image-placeholder">
-                        <span>[Certificate Photo Placeholder]</span>
+                        <span><img src="UI.png" alt="Certificate Image 2"></span>
                     </div>
                     <div class="cert-info">
-                        <h4>UI/UX Design Masterclass</h4>
-                        <p>Issued by [Issuer Name]. Advanced techniques in user research, wireframing, and prototyping.
+                        <h4>UI Design Certification</h4>
+                        <p>Issued by Coding Studio. Advanced techniques in user research, wireframing, and prototyping.
                         </p>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="certificate-card glass-card interactive-card">
+                    <div class="cert-image-placeholder">
+                        <span><img src="UX.png" alt="UX Certification"></span>
+                    </div>
+                    <div class="cert-info">
+                        <h4>UX Design Certification</h4>
+                        <p>Issued by Coding Studio. Mastered principles of User Experience design, covering wireframing
+                            and user research.</p>
                     </div>
                 </div>
 
@@ -309,4 +330,3 @@
 </body>
 
 </html>
-
